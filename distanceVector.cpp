@@ -1,3 +1,16 @@
+/*
+	STRUKTUR VECTOR(MATRIX)
+
+	VECTOR DISTANCE
+	NODE | DISTANCE | NEXTHOP
+
+	NEIGHBOUR TABLE
+	NODE | list of NEIGHBOUR NODE
+
+	SKENARIO TABLE
+	FROM | TO
+*/
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -104,7 +117,7 @@ vector<int> pushVector(int idx, string text) {
 }
 
 void updateDistanceVector(vector<vector<int> > distanceVector, vector<int> skenario) {
-	
+
 }
 
 void printVector(vector<vector<int> > vectorPrint) {
