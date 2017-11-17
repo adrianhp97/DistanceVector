@@ -6,13 +6,17 @@ using namespace std;
 
 vector<vector<int> > inputNode();
 vector<vector<int> > inputSkenario();
+vector<vector<int> > makeDistanceVector(int n_node, vector<int> node);
 vector<int> convertStringToInt(string text);
 vector<int> pushVector(int idx, string text);
+void updateDistanceVector(vector<int> distanceVector, vector<int> skenario);
 void printVector(vector<vector<int> > vectorPrint);
 
 int main() {
 	vector<vector<int> > neighbour_table(inputNode());
 	vector<vector<int> > skenario_table(inputSkenario());
+	vector<vector<int> > distanceVector(makeDistanceVector(neighbour_table.size(), neighbour_table[0]));
+
 	return 0;
 }
 
@@ -38,14 +42,39 @@ vector<vector<int> > inputSkenario() {
 
 	cin >> n_skenario;
 	for (int idx = 0; idx < n_skenario; idx++) {
-		string skenario_text;
+		int from, to;
 		vector<int> single_skenario;
 
-		cin >> skenario_text;
-		single_skenario = pushVector(idx, skenario_text);
+		cin >> from;
+		cin >> to;
+		single_skenario.push_back(from);
+		single_skenario.push_back(to);
 		skenario.push_back(single_skenario);
 	}
 	return skenario;
+}
+
+vector<vector<int> > makeDistanceVector(int n_node, vector<int> node) {
+	vector<vector<int> > distanceVector;
+	for(int idx = 1; idx <= n_node; idx++) {
+		vector<int> single_vector;
+
+		single_vector.push_back(idx);
+		single_vector.push_back(-1);
+		single_vector.push_back(-1);
+		distanceVector.push_back(single_vector);
+	}
+
+	for(vector<int>::iterator iit = node.begin(); iit != node.end(); iit++) {	
+		if(iit == node.begin()) {
+			distanceVector[(*iit)-1][1] = (0);
+		} else {
+			distanceVector[(*iit)-1][1] = (1);
+		}
+		distanceVector[(*iit)-1][2] = (*iit);
+	}
+
+	return distanceVector;
 }
 
 vector<int> convertStringToInt(string text) {
@@ -72,6 +101,10 @@ vector<int> pushVector(int idx, string text) {
 	}
 	
 	return pushedVector;
+}
+
+void updateDistanceVector(vector<vector<int> > distanceVector, vector<int> skenario) {
+	
 }
 
 void printVector(vector<vector<int> > vectorPrint) {
