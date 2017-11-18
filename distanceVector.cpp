@@ -20,15 +20,22 @@ using namespace std;
 vector<vector<int> > inputNode();
 vector<vector<int> > inputSkenario();
 vector<vector<int> > makeDistanceVector(int n_node, vector<int> node);
+vector<vector<vector<int> > > initiateDistanceVector(vector<vector<int> > node);
 vector<int> convertStringToInt(string text);
 vector<int> pushVector(int idx, string text);
-void updateDistanceVector(vector<int> distanceVector, vector<int> skenario);
 void printVector(vector<vector<int> > vectorPrint);
+void printRoutingTable(vector<vector<int> > vectorPrint);
+void updateDistanceVector(vector<vector<int> > from, vector<vector<int> > *to);
 
 int main() {
 	vector<vector<int> > neighbour_table(inputNode());
 	vector<vector<int> > skenario_table(inputSkenario());
-	vector<vector<int> > distanceVector(makeDistanceVector(neighbour_table.size(), neighbour_table[0]));
+	vector<vector<vector<int> > > distanceVector(initiateDistanceVector(neighbour_table));
+
+	for(int idx = 0; idx < skenario_table.size(); idx++) {
+		updateDistanceVector(distanceVector[skenario_table[idx][0]], &distanceVector[skenario_table[idx][1]]);
+		printRoutingTable(distanceVector[skenario_table[idx][1]]);
+	}
 
 	return 0;
 }
@@ -90,6 +97,16 @@ vector<vector<int> > makeDistanceVector(int n_node, vector<int> node) {
 	return distanceVector;
 }
 
+vector<vector<vector<int> > > initiateDistanceVector(vector<vector<int> > node) {
+	vector<vector<vector<int> > > distanceVector;
+	
+	for(int idx = 0; idx < node.size(); idx++) {
+		distanceVector.push_back(makeDistanceVector(node.size(), node[idx]));
+	}
+
+	return distanceVector;
+}
+
 vector<int> convertStringToInt(string text) {
 	vector<int> arrayOfInt;
 	for(int idx = 0; idx < text.length(); idx++) {
@@ -116,10 +133,6 @@ vector<int> pushVector(int idx, string text) {
 	return pushedVector;
 }
 
-void updateDistanceVector(vector<vector<int> > distanceVector, vector<int> skenario) {
-
-}
-
 void printVector(vector<vector<int> > vectorPrint) {
 	for(vector<vector<int> >::iterator iit = vectorPrint.begin(); iit != vectorPrint.end(); iit++) {
 		if((*iit).size() != 0) {
@@ -129,4 +142,19 @@ void printVector(vector<vector<int> > vectorPrint) {
 		}
 		cout << endl;		
 	}
+}
+
+void printRoutingTable(vector<vector<int> > vectorPrint) {
+	for(vector<vector<int> >::iterator iit = vectorPrint.begin(); iit != vectorPrint.end(); iit++) {
+		for(vector<int>::iterator jit = (*iit).begin(); jit != (*iit).end(); jit++) {
+			if((*jit) != (*iit).begin()) {
+				cout << *jit << ' ';
+			}
+		}
+		cout << endl;
+	}
+}
+
+void updateDistanceVector(vector<vector<int> > from, vector<vector<int> > *to) {
+	
 }
