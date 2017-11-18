@@ -147,7 +147,7 @@ void printVector(vector<vector<int> > vectorPrint) {
 void printRoutingTable(vector<vector<int> > vectorPrint) {
 	for(vector<vector<int> >::iterator iit = vectorPrint.begin(); iit != vectorPrint.end(); iit++) {
 		for(vector<int>::iterator jit = (*iit).begin(); jit != (*iit).end(); jit++) {
-			if((*jit) != (*iit).begin()) {
+			if(jit != (*iit).begin()) {
 				cout << *jit << ' ';
 			}
 		}
@@ -156,5 +156,5 @@ void printRoutingTable(vector<vector<int> > vectorPrint) {
 }
 
 void updateDistanceVector(vector<vector<int> > from, vector<vector<int> > *to) {
-	
+
 }
