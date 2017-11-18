@@ -33,11 +33,14 @@ int main() {
 	vector<vector<vector<int> > > distanceVector(initiateDistanceVector(neighbour_table));
 
 	for(int idx = 0; idx < skenario_table.size(); idx++) {
-		int from = skenario_table[idx][0];
-		int to = skenario_table[idx][1];
-		updateDistanceVector(distanceVector[from], &distanceVector[to], from);
-		printRoutingTable(distanceVector[to]);
+		int from = skenario_table[idx][0] - 1;
+		int to = skenario_table[idx][1] - 1;
+		updateDistanceVector(distanceVector[from], &distanceVector[to], from + 1);
 	}
+
+	for(int idx = 0; idx < distanceVector.size(); idx++) {
+		printRoutingTable(distanceVector[idx]);
+	}	
 
 	return 0;
 }
@@ -162,11 +165,6 @@ void updateDistanceVector(vector<vector<int> > from, vector<vector<int> > *to, i
 		if((*to)[idx][1] < 0) {
 			if(from[idx][1] != (*to)[idx][1]) {
 				(*to)[idx][1] = from[idx][1] + 1;
-				(*to)[idx][2] = node_from;
-			}
-		} else {
-			if(from[idx][1] < (*to)[idx][1]) {
-				(*to)[idx][1] = from[idx][1];
 				(*to)[idx][2] = node_from;
 			}
 		}
