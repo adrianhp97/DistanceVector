@@ -120,7 +120,9 @@ void printVector(vector<vector<int> > vectorPrint) {
 	for(vector<vector<int> >::iterator iit = vectorPrint.begin(); iit != vectorPrint.end(); iit++) {
 		if((*iit).size() != 0) {
 			for(vector<int>::iterator jit = (*iit).begin(); jit != (*iit).end(); jit++) {
-				cout << *jit << ' ';
+                if(jit != (*iit).end()) {
+                    cout << *jit << ' ';    
+                }
 			}
 		}
 		cout << endl;		
@@ -131,7 +133,9 @@ void printRoutingTable(vector<vector<int> > vectorPrint) {
 	for(vector<vector<int> >::iterator iit = vectorPrint.begin(); iit != vectorPrint.end(); iit++) {
 		for(vector<int>::iterator jit = (*iit).begin(); jit != (*iit).end(); jit++) {
 			if(jit != (*iit).begin()) {
-				cout << *jit << ' ';
+                if(jit != (*iit).end()) {
+                    cout << *jit << ' ';
+                }
 			}
 		}
 		cout << endl;
