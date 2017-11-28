@@ -77,7 +77,7 @@ vector<vector<int> > inputSkenario() {
 		cin >> from;
 		cin >> to;
 		single_skenario.push_back(from);
-		single_skenario.push_back(to);
+        single_skenario.push_back(to);
 		skenario.push_back(single_skenario);
 	}
 	return skenario;
