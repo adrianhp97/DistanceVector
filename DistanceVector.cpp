@@ -2,6 +2,12 @@
 
 using namespace std;
 
+/* TUBES JARKOM
+
+    Winarto     - 13515061
+    Ray Andrew  - 13515073
+    Adrian H P  - 13515091
+*/
 struct TableRow {
     int distance;
     int nextHop;
@@ -29,7 +35,7 @@ int main() {
         for(int i=0; i < m; i++) {
             int u,v;
             cin >> u >> v;
-            if (validateInt(u,1,n) && validateInt(v,1,n)) {
+            if (validateInt(u,1,n) && validateInt(v,1,n) && u != v) {
                 rTable[u-1][v-1].distance = rTable[v-1][u-1].distance = 1;
                 rTable[u-1][v-1].nextHop = v;
                 rTable[v-1][u-1].nextHop = u;
@@ -43,14 +49,13 @@ int main() {
             for(int i=0; i < s;i++) {
                 int x,y;
                 cin >> x >> y;
-                if (validateInt(x,1,n) && validateInt(y,1,n) && rTable[x-1][y-1].distance == 1) {
+                if (validateInt(x,1,n) && validateInt(y,1,n) && x != y && rTable[x-1][y-1].distance == 1) {
                     for(int j=0; j<n; j++) {
                         if (rTable[x-1][j].distance != -1 && (j != y-1 || j != x-1)) {
-                            if (rTable[y-1][j].distance == -1) {
+                            if (rTable[y-1][j].distance == -1 || rTable[x-1][j].distance < rTable[y-1][j].distance-1) {
                                 rTable[y-1][j].distance = rTable[x-1][j].distance + 1;
                                 rTable[y-1][j].nextHop = x;
-                            } else if (rTable[x-1][j].distance < rTable[y-1][j].distance) {
-                                rTable[y-1][j].distance = rTable[x-1][j].distance + 1;
+                            } else if (rTable[x-1][j].distance == rTable[y-1][j].distance-1 && x < rTable[y-1][j].nextHop) {
                                 rTable[y-1][j].nextHop = x;
                             }
                         }
