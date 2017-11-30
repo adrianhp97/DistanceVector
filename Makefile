@@ -6,7 +6,6 @@ MAIN=./src/DistanceVector.cpp
 
 SOURCES=$(wildcard ./src/*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-MAIN_OBJECTS=$(filter-out $(MAIN:.cpp=.o), $(OBJECTS))
 
 EXECUTABLE=./DistanceVector
 
@@ -16,8 +15,8 @@ all: bin
 
 bin: $(EXECUTABLE)
 
-$(EXECUTABLE): $(MAIN_OBJECTS)
-	$(CC) $(LDFLAGS) $(MAIN_OBJECTS) -o $@
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) $< -o $@
@@ -25,3 +24,6 @@ $(EXECUTABLE): $(MAIN_OBJECTS)
 clean:
 	-rm $(OBJECTS)
 	-rm $(EXECUTABLE)
+
+run:
+	./DistanceVector
